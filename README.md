@@ -28,7 +28,8 @@ Implemented will be marked with :heavy_check_mark:
 * **nurse_id**: ID of the nurse
 
 ##### Example JSON
-```{
+```
+{
   "id": "65dfe4v6b1efv4d5",
   "patient_id": "6249861651986545198",
   "device_type": "thermometer",
