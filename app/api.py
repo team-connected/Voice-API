@@ -6,7 +6,7 @@ import json
 import uuid
 import os
 
-conUri = os.getenv("data_api", "http://145.89.207.78:5000")
+conUri = os.getenv("data_api", "http://umc-api.maartenmol.nl:5000")
 
 #Print some usefull information to console
 print("Starting API Server")
