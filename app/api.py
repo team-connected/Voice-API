@@ -5,13 +5,16 @@ import requests
 import json
 import uuid
 import os
+import pyfiglet
 
 conUri = os.getenv("data_api", "http://umc-api.maartenmol.nl:5000")
 
 #Print some usefull information to console
+ascii_banner = pyfiglet.figlet_format("UMC Voice-API")
+print(ascii_banner)
 print("Starting API Server")
 print("API Server Version: V1.0")
-print("Developed by: Maarten Mol (All rights reserved)")
+print("Developed by: Haydn Felida, Jeroen Verkerk, Sam Zandee, Shaniah Arrias, Maarten Mol. (All rights reserved)")
 
 #Define Word Types for Split
 def getWords():
@@ -24,14 +27,14 @@ app = Flask(__name__)
 #Define error function for JSON error response
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({"error": "Not found"}), 404)
+    return make_response(jsonify({"error": "notFound"}), 404)
 
 #Define the root
 @app.route("/")
 def index():
-    return "Please use the V1 API! Developed by: Maarten Mol (All rights reserved)"
+    return "Please use the V1 API! Developed by: Haydn Felida, Jeroen Verkerk, Sam Zandee, Shaniah Arrias, Maarten Mol. (All rights reserved)"
 
-#Define CREATE USER
+#Define PROCESS VOICE DATA
 @app.route('/api/v1/voice/', methods=['POST'])
 def process_voice():
     try:
@@ -55,13 +58,13 @@ def process_voice():
 
                 metric_type = word
 
-        print("Verwerkt: " + metric_type + " = " + value)
+        print("[DEBUG] Voice Data Processed: " + metric_type + " = " + value)
 
         #Data to be sent to API 
         datax = {"metric_type":  metric_type, "value": value}
         data = json.dumps(datax, sort_keys=True, indent=4)
 
-        print("JSON Data Generated: " + data)
+        print("[DEBUG] JSON Data Generated: " + data)
 
         API_ENDPOINT = conUri + "/api/v1/metric/id=" + metric_id
 
