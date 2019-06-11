@@ -18,7 +18,7 @@ print("Developed by: Haydn Felida, Jeroen Verkerk, Sam Zandee, Shaniah Arrias, M
 
 #Define Word Types for Split
 def getWords():
-    typeWords = ['temperatuur', 'bloeddruk', 'zuurstof']
+    typeWords = ['temperatuur', 'bloeddruk', 'gewicht']
     return typeWords
 
 #Define app with Flask
@@ -61,7 +61,7 @@ def process_voice():
         print("[DEBUG] Voice Data Processed: " + metric_type + " = " + value)
 
         #Data to be sent to API 
-        datax = {"metric_type":  metric_type, "value": value}
+        datax = {metric_type : value}
         data = json.dumps(datax, sort_keys=True, indent=4)
 
         print("[DEBUG] JSON Data Generated: " + data)
