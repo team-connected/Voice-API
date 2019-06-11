@@ -6,6 +6,7 @@ import json
 import uuid
 import os
 import pyfiglet
+import re
 
 conUri = os.getenv("data_api", "http://umc-api.maartenmol.nl:5000")
 
@@ -48,6 +49,28 @@ def process_voice():
         type_word = getWords()
         split_line = raw_text.split()
 
+        # FOR TESTING
+        textFilter = raw_text.lower()
+
+        if "bloeddruk" in textFilter:
+            metricState = "bloeddruk"
+
+            metricValueRaw = re.findall('\d+', textFilter)
+
+            metricValue = metricValueRaw[0] + "/" + metricValueRaw[1]
+
+        if "gewicht" in textFilter:
+            metricState = "gewicht"
+
+            metricValue = int(re.search(r'\d+', textFilter).group())
+
+        if "temperatuur" in textFilter:
+            metricState = "temperatuur"
+
+            metricValue = int(re.search(r'\d+', textFilter).group())
+
+        # END TESTING
+
         for i in range(len(split_line)):
             word = split_line[i]
             if word in type_word:
@@ -59,6 +82,10 @@ def process_voice():
                 metric_type = word
 
         print("[DEBUG] Voice Data Processed: " + metric_type + " = " + value)
+
+        print("##### TEST DATA INCOMMING! #####")
+        print("[TESTING DEBUG] Voice Data Processed: " + metricState + " = " + metricValue)
+        print("##### END OF TEST DATA! #####")
 
         #Data to be sent to API 
         datax = {metric_type : value}
