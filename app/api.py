@@ -51,23 +51,28 @@ def process_voice():
 
         # FOR TESTING
         textFilter = raw_text.lower()
+        textFilter.replace(",", ".")
 
         if "bloeddruk" in textFilter:
             metricState = "bloeddruk"
 
-            metricValueRaw = re.findall('\d+', textFilter)
+            metricValueRaw = re.findall(r"[-+]?\d*\.\d+|\d+", textFilter)
 
             metricValue = metricValueRaw[0] + "/" + metricValueRaw[1]
 
         if "gewicht" in textFilter:
             metricState = "gewicht"
 
-            metricValue = int(re.search(r'\d+', textFilter).group())
+            metricValueRaw = re.findall(r"[-+]?\d*\.\d+|\d+", textFilter)
+
+            metricValue = metricValueRaw[0]
 
         if "temperatuur" in textFilter:
             metricState = "temperatuur"
 
-            metricValue = int(re.search(r'\d+', textFilter).group())
+            metricValueRaw = re.findall(r"[-+]?\d*\.\d+|\d+", textFilter)
+
+            metricValue = metricValueRaw[0]
 
         # END TESTING
 
