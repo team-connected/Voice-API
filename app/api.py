@@ -86,7 +86,7 @@ def process_voice():
 
         response = json.loads(r.text)
 
-        return jsonify({"processedData":metric_type + "=" + value, "postData" : response}), 201, {'Content-Type': 'application/json; charset=utf-8'}
+        return jsonify({"processedData":metricState + "=" + metricValue, "postData" : response}), 201, {'Content-Type': 'application/json; charset=utf-8'}
 
     except Exception as e:
         return dumps({'error' : str(e)}), 500, {'Content-Type': 'application/json; charset=utf-8'}
