@@ -21,8 +21,6 @@ Implemented will be marked with :heavy_check_mark:
 #### Voice
 * **_id**: Unique number per request
 * **metric_id**: Metric ID
-* **patient_id**: ID of the patient
-* **nurse_id**: ID of the nurse
 * **raw_text**: Unproccessed text from the app
 
 ##### Example JSON

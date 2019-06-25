@@ -43,8 +43,6 @@ def process_voice():
     try:
         data = json.loads(request.data)
         metric_id = data['metric_id']
-        patient_id = data['patient_id']
-        nurse_id = data['nurse_id']
         raw_text = data['raw_text']
         uid = uuid.uuid4().hex
 
@@ -67,6 +65,13 @@ def process_voice():
 
         if "temperatuur" in textFilter:
             metricState = "temperatuur"
+
+            metricValueRaw = re.findall(r"[-+]?\d*\,\d+|\d+", textFilter)
+
+            metricValue = metricValueRaw[0]
+
+        if "pijnscore" in textFilter:
+            metricState = "pijnscore"
 
             metricValueRaw = re.findall(r"[-+]?\d*\,\d+|\d+", textFilter)
 
