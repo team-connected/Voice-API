@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 #Import required dependencies
 from flask import Flask, jsonify, abort, make_response, request
 from bson.json_util import dumps
@@ -46,10 +48,6 @@ def process_voice():
         raw_text = data['raw_text']
         uid = uuid.uuid4().hex
 
-        type_word = getWords()
-        split_line = raw_text.split()
-
-        # FOR TESTING
         textFilter = raw_text.lower()
         textFilter.replace(".", ",")
 
@@ -74,26 +72,10 @@ def process_voice():
 
             metricValue = metricValueRaw[0]
 
-        # END TESTING
-
-        for i in range(len(split_line)):
-            word = split_line[i]
-            if word in type_word:
-                if word == "bloeddruk":
-                    value = split_line[i + 2] + "/" + split_line[i + 4]
-                else:
-                    value = (split_line[i + 2])
-
-                metric_type = word
-
-        print("[DEBUG] Voice Data Processed: " + metric_type + " = " + value)
-
-        print("##### TEST DATA INCOMMING! #####")
-        print("[TESTING DEBUG] Voice Data Processed: " + metricState + " = " + metricValue)
-        print("##### END OF TEST DATA! #####")
+        print("[DEBUG] Voice Data Processed: " + metricState + " = " + metricValue)
 
         #Data to be sent to API 
-        datax = {metric_type : value}
+        datax = {metricState : metricValue}
         data = json.dumps(datax, sort_keys=True, indent=4)
 
         print("[DEBUG] JSON Data Generated: " + data)
