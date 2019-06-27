@@ -16,13 +16,8 @@ conUri = os.getenv("data_api", "http://umc-api.maartenmol.nl:5000")
 ascii_banner = pyfiglet.figlet_format("UMC Voice-API")
 print(ascii_banner)
 print("Starting API Server")
-print("API Server Version: V1.0")
+print("API Server Version: V1.1")
 print("Developed by: Haydn Felida, Jeroen Verkerk, Sam Zandee, Shaniah Arrias, Maarten Mol. (All rights reserved)")
-
-#Define Word Types for Split
-def getWords():
-    typeWords = ['temperatuur', 'bloeddruk', 'gewicht']
-    return typeWords
 
 #Define app with Flask
 app = Flask(__name__)
