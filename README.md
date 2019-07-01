@@ -3,7 +3,7 @@
 ```docker run --name voice-api -d -e data_api="data-api" -p 8000:8000 teamconnected/voice-api```
 
 ### Environment Flags
-| Flag | Description |
+| Flag | Description | Example |
 | ------------- | ------------- | ------------- |
 | data_api | The hostname or IP to the Data-API | Example: http://umc-api.maartenmol.nl:5000 |
 
